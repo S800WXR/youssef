@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز موعد - عيادة سما لطب الأسنان</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1><i class="fas fa-tooth"></i> سما لطب الأسنان</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="index.html#services">خدماتنا</a></li>
+                    <li><a href="index.html#doctors">أطباؤنا</a></li>
+                    <li><a href="index.html#about">عن العيادة</a></li>
+                    <li><a href="booking.html" class="active">حجز موعد</a></li>
+                    <li><a href="index.html#contact">اتصل بنا</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="booking-hero">
+        <div class="container">
+            <h2>حجز موعد</h2>
+            <p>يمكنك حجز موعدك بسهولة من خلال تعبئة النموذج التالي</p>
+        </div>
+    </section>
+
+    <section class="booking-form">
+        <div class="container">
+            <form id="appointmentForm">
+                <div class="form-group">
+                    <label for="name">الاسم الكامل</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني</label>
+                    <input type="email" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="service">نوع الخدمة</label>
+                    <select id="service" name="service" required>
+                        <option value="">اختر الخدمة</option>
+                        <option value="علاج الأسنان">علاج الأسنان</option>
+                        <option value="تقويم الأسنان">تقويم الأسنان</option>
+                        <option value="جراحة الفم">جراحة الفم</option>
+                        <option value="تبييض الأسنان">تبييض الأسنان</option>
+                        <option value="فحص دوري">فحص دوري</option>
+                        <option value="أخرى">أخرى</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="doctor">الطبيب المفضل (اختياري)</label>
+                    <select id="doctor" name="doctor">
+                        <option value="">لا تفضيل</option>
+                        <option value="د. أحمد محمد">د. أحمد محمد</option>
+                        <option value="د. سارة خالد">د. سارة خالد</option>
+                        <option value="د. عمر عبدالله">د. عمر عبدالله</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">التاريخ</label>
+                    <input type="date" id="date" name="date" required>
+                </div>
+                <div class="form-group">
+                    <label for="time">الوقت</label>
+                    <select id="time" name="time" required>
+                        <option value="">اختر الوقت</option>
+                        <option value="08:00 - 09:00">08:00 - 09:00</option>
+                        <option value="09:00 - 10:00">09:00 - 10:00</option>
+                        <option value="10:00 - 11:00">10:00 - 11:00</option>
+                        <option value="11:00 - 12:00">11:00 - 12:00</option>
+                        <option value="12:00 - 13:00">12:00 - 13:00</option>
+                        <option value="16:00 - 17:00">16:00 - 17:00</option>
+                        <option value="17:00 - 18:00">17:00 - 18:00</option>
+                        <option value="18:00 - 19:00">18:00 - 19:00</option>
+                        <option value="19:00 - 20:00">19:00 - 20:00</option>
+                        <option value="20:00 - 21:00">20:00 - 21:00</option>
+                        <option value="21:00 - 22:00">21:00 - 22:00</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="notes">ملاحظات إضافية (اختياري)</label>
+                    <textarea id="notes" name="notes" rows="4"></textarea>
+                </div>
+                <button type="submit" class="btn">تأكيد الحجز</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 عيادة سما لطب الأسنان. جميع الحقوق محفوظة.</p>
+            <div class="social">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>تم حجز الموعد بنجاح!</h3>
+            <div id="appointmentDetails"></div>
+            <button id="printBtn" class="btn">طباعة التفاصيل</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
