@@ -6,8 +6,37 @@
     <title>حجز موعد - عيادة سما لطب الأسنان</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- إضافة مكتبة SMTPJS لإرسال البريد -->
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <style>
+        /* أنماط المودال (موجودة مسبقًا) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .modal-content {
+            background: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 500px;
+            text-align: center;
+        }
+        .close {
+            float: left;
+            cursor: pointer;
+            font-size: 24px;
+        }
+    </style>
 </head>
 <body>
+    <!-- الهيكل الحالي للنموذج (بدون تغيير) -->
     <header>
         <div class="container">
             <div class="logo">
@@ -119,6 +148,67 @@
         </div>
     </div>
 
-    <script src="js/script.js"></script>
+    <script>
+        // معالجة إرسال النموذج
+        document.getElementById('appointmentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // جمع بيانات النموذج
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                service: document.getElementById('service').value,
+                doctor: document.getElementById('doctor').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                notes: document.getElementById('notes').value
+            };
+
+            // عرض تفاصيل الحجز في المودال
+            document.getElementById('appointmentDetails').innerHTML = `
+                <p><strong>الاسم:</strong> ${formData.name}</p>
+                <p><strong>الهاتف:</strong> ${formData.phone}</p>
+                <p><strong>الخدمة:</strong> ${formData.service}</p>
+                <p><strong>التاريخ:</strong> ${formData.date}</p>
+                <p><strong>الوقت:</strong> ${formData.time}</p>
+            `;
+            document.getElementById('confirmationModal').style.display = 'block';
+
+            // إرسال البريد الإلكتروني إذا كان موجودًا
+            if (formData.email) {
+                Email.send({
+                    SecureToken: "your_secure_token_here", // احصل عليه من SMTPJS.com
+                    To: formData.email,
+                    From: "programmeryoussefzaghnoun@gmail.com",
+                    Subject: "تأكيد حجز موعد - عيادة سما لطب الأسنان",
+                    Body: `
+                        <h3>شكرًا لحجزك معنا، ${formData.name}!</h3>
+                        <p>تفاصيل الموعد:</p>
+                        <ul>
+                            <li><strong>الخدمة:</strong> ${formData.service}</li>
+                            <li><strong>التاريخ:</strong> ${formData.date}</li>
+                            <li><strong>الوقت:</strong> ${formData.time}</li>
+                        </ul>
+                        <p>يرجى الحضور قبل 10 دقائق من الموعد.</p>
+                    `,
+                }).then(
+                    message => console.log("تم إرسال التأكيد إلى البريد الإلكتروني")
+                ).catch(
+                    error => console.error("فشل إرسال البريد:", error)
+                );
+            }
+        });
+
+        // إغلاق المودال
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('confirmationModal').style.display = 'none';
+        });
+
+        // زر الطباعة
+        document.getElementById('printBtn').addEventListener('click', function() {
+            window.print();
+        });
+    </script>
 </body>
 </html>
